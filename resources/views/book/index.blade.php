@@ -44,8 +44,17 @@
                 </a>
             </th>
 
-        {{--filtravimas pagal pavadinima--}}
+        {{--AUTHORS MYGTUKAS--}}
             <th>
+                <form method="GET" action="{{route('author.index') }}">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">ALL AUTHORS LIST</button>
+                </form>
+            </th>
+
+
+        {{--filtravimas pagal pavadinima--}}
+        <th>
             <form method="GET" action="{{route('book.index') }}">
                 @csrf
                 <select name="bookTitle">
@@ -56,14 +65,6 @@
                 <button type="submit">FILTER BY BOOK TITLE</button>
             </form>
         </th>
-
-        {{--AUTHORS MYGTUKAS--}}
-            <th>
-                <form method="GET" action="{{route('author.index') }}">
-                    @csrf
-                    <button class="btn btn-secondary" type="submit">ALL AUTHORS LIST</button>
-                </form>
-            </th>
 
         {{--filtravimas pagal autoriu--}}
         <th>
