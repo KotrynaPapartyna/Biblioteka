@@ -6,6 +6,8 @@ use App\Book;
 use App\Author;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class BookController extends Controller
 {
     /**
@@ -15,18 +17,24 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        $collumnName=$request->collumnname;
-        $sortby=$request->sortby;
 
+        $bookTitle = $request->bookTitle; // pavadinimas
+        $bookAuthor = $request->bookAuthor; //pagal autoriu
 
-        if (!$collumnName && !$sortby) {
-           $collumnName='id';
-            $sortby='asc';
+        $filterBooks = Book::all();
+        $authors = Author::all();
+
+        if($bookTitle) {
+            //vykdoma filtracija sortable()
+            $books = Book::sortable()->where('title', $bookTitle)->paginate(10); //sortable()
+        } else if ($bookAuthor) {
+            $books = Book::sortable()->where('author_id', $bookAuthor)->paginate(10); //sortable()
+        }
+        else {
+            $books = Book::sortable()->paginate(10); //sortable()
         }
 
-        $books=Book::orderBy( $collumnName, $sortby)->paginate(5);
-
-        return view('book.index', ['books'=>$books, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
+        return view("book.index",["books"=>$books, "authors"=>$authors, "filterBooks" => $filterBooks]);
     }
 
     /**
@@ -145,4 +153,22 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route("book.index")->with('success_message','The Book was successfully deleted');
     }
+
+    public function generateStatisticsPdf()
+    {
+        $books=Book::all();
+        $booksCount=$books->count();
+
+        $authors=Author::all();
+        $authorsCount=$authors->count();
+
+        // i vaizda perduodami visi autoriai, visos knugos, t.y. tiek kiek yra, kiek suskaiciavo
+        view()->share(["booksCount" => $booksCount, 'authorsCount' => $authorsCount]);
+        $pdf=PDF::loadView('pdf_template', $books);
+
+        return $pdf->download("statistics.pdf");
+
+
+    }
+
 }

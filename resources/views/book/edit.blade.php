@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Book title') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
+                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{$book->title}}" name="title" autofocus>
                                         @error('title')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>
@@ -45,7 +45,7 @@
                             <div class="form-group row">
                                 <label for="isbn" class="col-md-4 col-form-label text-md-right">{{ __('Book isbn') }}</label>
                                 <div class="col-md-6">
-                                    <input id="isbn"type="text" class="form-control @error('isbn') is-invalid @enderror " value="{{ old('isbn') }}" name="isbn" autofocus>
+                                    <input id="isbn"type="text" class="form-control @error('isbn') is-invalid @enderror " value="{{$book->isbn}}" name="isbn" autofocus>
                                         @error('isbn')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>
@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                 <label for="pages" class="col-md-4 col-form-label text-md-right">{{ __('Book pages') }}</label>
                                 <div class="col-md-6">
-                                    <input id="pages"type="text" class="form-control @error('pages') is-invalid @enderror " value="{{ old('pages') }}" name="pages" autofocus>
+                                    <input id="pages"type="text" class="form-control @error('pages') is-invalid @enderror " value="{{$book->pages}}" name="pages" autofocus>
                                         @error('pages')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>
@@ -72,7 +72,7 @@
                                 <label for="about" class="col-md-4 col-form-label text-md-right">{{ __('Book description') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea class="form- control summernote" name="about" required>
+                                    <textarea class="form- control summernote" name="about" value="{{$book->about}}" required>
 
                                     </textarea>
                                             @error('about')
@@ -91,7 +91,7 @@
 
                                         @foreach ($authors as $author)
 
-                                            <option value="{{$author->id}}" @if($author->id == $book->autho_id) selected @endif >{{$author->name}} {{$author->surname}}</option>
+                                            <option value="{{$author->id}}" @if($author->id == $book->author_id) selected @endif >{{$author->name}} {{$author->surname}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -9,7 +9,7 @@ class Author extends Model
 {
 
     public function authorBooks () {
-        return $this->hasMany(Book::class, 'id');
+        return $this->hasMany(Book::class, 'author_id','id');
     }
 
     use Sortable;

@@ -17,7 +17,10 @@
             <div class="card">
                 <div class="card-header">{{ __('BOOKS') }}</div>
 
+
+
     {{--MYGTUKU LAUKAS--}}
+
     <table>
         <tr>
         {{--SUKURIMO MYGTUKAS--}}
@@ -28,6 +31,38 @@
                 </form>
             </th>
 
+            <th>
+                <a href="{{route('book.generatestatistics')}}" class="btn btn-secondary">
+                    EXPORT STATISTICS
+                </a>
+            </th>
+
+        {{--filtravimas pagal pavadinima--}}
+            <th>
+            <form method="GET" action="{{route('book.index') }}">
+                @csrf
+                <select name="bookTitle">
+                    @foreach ($books as $book)
+                        <option value="{{$book->title}}">{{$book->title}}</option>
+                    @endforeach
+                </select>
+                <button type="submit">FILTER BY BOOK TITLE</button>
+            </form>
+        </th>
+
+        {{--filtravimas pagal autoriu--}}
+        <th>
+        <form method="GET" action="{{route('book.index')}}">
+            @csrf
+            <select name="bookAuthor">
+                @foreach ($authors as $author)
+                    <option value="{{$author->id}}">{{$author->name}} {{$author->surname}}</option>
+                @endforeach
+            </select>
+            <button type="submit">FILTER BY AUTHOR</button>
+        </th>
+
+        <th><a href="{{route('book.index')}}" class="btn btn-success">CLEAR FILER</a></th>
 
         {{--AUTHORS MYGTUKAS--}}
             <th>
@@ -48,15 +83,15 @@
         </tr>
     </table>
 
-    {{--RIKIAVIMO FORMA--}}
+    {{--RIKIAVIMO FORMA
     <form action="{{route('book.index')}}" method="GET">
         @csrf
         <select name="collumnname">
 
-            {{--jeigu gautas kintamasis yra id- jis turi buti pazymetas--}}
+            {{--jeigu gautas kintamasis yra id- jis turi buti pazymetas
             @if ($collumnName == 'id')
                 <option value="id" selected>ID</option>
-                {{--kitu atveju- jis nera pazymetas--}}
+                {{--kitu atveju- jis nera pazymetas
                 @else
                 <option value="id">ID</option>
             @endif
@@ -100,7 +135,7 @@
 
         <button type="submit">SORT</button>
 
-    </form>
+    </form>--}}
 
     <table class="table table-striped table-hover table-sm">
         <tr>
@@ -110,7 +145,7 @@
                 <th>@sortablelink('title', 'TITLE')</th>
                 <th>@sortablelink('isbn', 'isbn' )</th>
                 <th>@sortablelink('pages', 'Pages' )</th>
-                <th>About Books</th>
+                <th>@sortablelink('about', 'About' )</th>
                 <th>@sortablelink('author_id', 'Author Name and Surname' )</th>
             </tr>
 

@@ -17,7 +17,7 @@ class Book extends Model
     protected $fillable=["title", "isbn", "pages", "about", "author_id"];
 
     // nurodomi visi stulpeliai kuriuo norima rikiuoti
-    public $sortable= ["id", "title", "about", "author_id"];
+    public $sortable= ["id", "title", "isbn", "pages", "about", "author_id"];
 
 
 

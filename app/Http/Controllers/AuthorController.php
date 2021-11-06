@@ -16,17 +16,9 @@ class AuthorController extends Controller
     public function index(Request $request)
     {
 
-        $collumnName=$request->collumnname;
-        $sortby=$request->sortby;
+        $authors = Author::sortable()->paginate(10);
 
-        if (!$collumnName && !$sortby) {
-           $collumnName='id';
-            $sortby='asc';
-        }
-
-        $authors=Author::orderBy( $collumnName, $sortby)->paginate(5);
-
-        return view('author.index', ['authors'=>$authors, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
+        return view('author.index', ['authors' => $authors]);
 
     }
 

@@ -55,47 +55,6 @@
         </tr>
     </table>
 
-    {{--RIKIAVIMO FORMA--}}
-    <form action="{{route('author.index')}}" method="GET">
-        @csrf
-        <select name="collumnname">
-
-            {{--jeigu gautas kintamasis yra id- jis turi buti pazymetas--}}
-            @if ($collumnName == 'id')
-                <option value="id" selected>ID</option>
-                {{--kitu atveju- jis nera pazymetas--}}
-                @else
-                <option value="id">ID</option>
-            @endif
-
-
-            @if ($collumnName == 'name')
-             <option value="name" selected>Name</option>
-            @else
-                <option value="name">Name</option>
-            @endif
-
-            @if ($collumnName == 'surname')
-                <option value="surname" selected>Surname</option>
-            @else
-                <option value="surname">Surname</option>
-            @endif
-
-        </select>
-
-        <select name="sortby">
-            @if ($sortby == "asc")
-                <option value="asc" selected>ASC</option>
-                <option value="desc">DESC</option>
-            @else
-                <option value="asc">ASC</option>
-                <option value="desc" selected>DESC</option>
-            @endif
-        </select>
-
-        <button type="submit">SORT</button>
-
-    </form>
 
     <table class="table table-striped table-hover table-sm">
         <tr>
@@ -124,7 +83,7 @@
                         </form>
                         </th>
                     </td>
-                </tr>
+        </tr>
 
         @endforeach
 
