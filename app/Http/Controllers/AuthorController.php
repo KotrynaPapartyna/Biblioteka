@@ -6,6 +6,8 @@ use App\Author;
 use App\Book;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class AuthorController extends Controller
 {
     /**
@@ -134,4 +136,37 @@ class AuthorController extends Controller
         return redirect()->route("author.index")->with('success_message','The Author was successfully deleted');
 
     }
+
+
+    // vieno Autoriaus PDF generavimas
+    public function generateAuthorPDF(Author $author) {
+
+        view()->share('author', $author);
+
+        //sukuria vaizda PFD faile- atvaizduoja
+        $pdf = PDF::loadView("pdf_author_template", $author);
+
+        return $pdf->download("author".$author->id.".pdf");
+
+    }
+
+    // visu Task PDF generavimas
+    public function generatePDF() {
+
+
+        $authors = Author::all();
+
+        view()->share('authors', $authors);
+
+        $pdf = PDF::loadView("pdf_templateA", $authors);
+
+        // galima pervadinti failo pavadinimus
+        return $pdf->download("authors.pdf");
+
+    }
+
+
+
+
+
 }

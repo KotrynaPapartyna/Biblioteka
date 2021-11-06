@@ -35,6 +35,11 @@
                 </form>
             </th>
 
+        {{--pdf mygtukas--}}
+        <th>
+            <a class="btn btn-dark" href="{{route('author.pdf')}}"> Export All Authors List to PDF </a>
+        <th>
+
 
         {{--KNYGU MYGTUKAS--}}
             <th>

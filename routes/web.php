@@ -26,6 +26,9 @@ Route::prefix('books')->group(function () {
         Route::post('update/{book}','BookController@update')->name('book.update')->middleware("auth");
         Route::post('delete/{book}','BookController@destroy')->name('book.destroy')->middleware("auth");
         Route::get('show/{book}','BookController@show')->name('book.show')->middleware("auth");
+        Route::get('search','BookController@search')->name('book.search')->middleware("auth");
+        Route::get('/pdf', 'BookController@generatePDF')->name('book.pdf');
+        Route::get('pdfBook/{book}', 'BookController@generateBookPDF')->name('book.pdfbook');
         Route::get('generateStatistics','BookController@generateStatisticsPDF')->name('book.generatestatistics');
     });
 
@@ -38,6 +41,9 @@ Route::prefix('books')->group(function () {
         Route::post('update/{author}','AuthorController@update')->name('author.update')->middleware("auth");
         Route::post('delete/{author}','AuthorController@destroy')->name('author.destroy')->middleware("auth");
         Route::get('show/{author}','AuthorController@show')->name('author.show')->middleware("auth");
+        Route::get('search','AuthorController@search')->name('author.search')->middleware("auth");
+        Route::get('/pdf', 'AuthorController@generatePDF')->name('author.pdf');
+        Route::get('pdfTask/{author}', 'AuthorController@generateAuthorPDF')->name('author.pdfauthor');
         });
 
 

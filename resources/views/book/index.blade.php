@@ -31,6 +31,13 @@
                 </form>
             </th>
 
+            {{-- visu autoriu ir knygu sugeneravimas i PDF--}}
+            <th>
+                <a class="btn btn-dark" href="{{route('book.pdf')}}"> Export All Books List to PDF </a>
+            <th>
+
+
+            {{-- visu autoriu ir knygu sugeneravimas i PDF--}}
             <th>
                 <a href="{{route('book.generatestatistics')}}" class="btn btn-secondary">
                     EXPORT STATISTICS
@@ -50,6 +57,14 @@
             </form>
         </th>
 
+        {{--AUTHORS MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('author.index') }}">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">ALL AUTHORS LIST</button>
+                </form>
+            </th>
+
         {{--filtravimas pagal autoriu--}}
         <th>
         <form method="GET" action="{{route('book.index')}}">
@@ -64,13 +79,7 @@
 
         <th><a href="{{route('book.index')}}" class="btn btn-success">CLEAR FILER</a></th>
 
-        {{--AUTHORS MYGTUKAS--}}
-            <th>
-                <form method="GET" action="{{route('author.index') }}">
-                    @csrf
-                    <button class="btn btn-secondary" type="submit">ALL AUTHORS LIST</button>
-                </form>
-            </th>
+
 
         {{--PAIESKOS FORMA
             <th>
@@ -79,7 +88,9 @@
                     <input type="text" name="search" placeholder="Enter searc key"/>
                     <button type="submit">SEARCH</button>
                 </form>
-            </th>--}}
+            </th>
+        --}}
+
         </tr>
     </table>
 

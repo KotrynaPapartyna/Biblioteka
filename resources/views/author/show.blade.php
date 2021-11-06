@@ -42,6 +42,10 @@
                         </div>
                     </div>
 
+                     {{--vieno autoriaus sugeneravimas i pdf --}}
+                    <a href="{{route('author.pdfauthor', [$author])}}" class="btn btn-dark">Export Author to PDF</a>
+
+                    {{--gryzimas i visa sarasa --}}
                     <a class="btn btn-info" href="{{route('author.index') }}">Back To Authors List</a>
 
                 </div>

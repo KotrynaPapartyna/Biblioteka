@@ -54,6 +54,9 @@
                         </div>
                     </div>
 
+                    {{--vienos knygos sugeneravimas PDF--}}
+                    <a href="{{route('book.pdfbook', [$book])}}" class="btn btn-dark">Export Book to PDF</a>
+                    {{--gryzimas i visa sarasa --}}
                     <a class="btn btn-info" href="{{route('book.index') }}">Back To Books List</a>
 
                 </div>

@@ -154,6 +154,8 @@ class BookController extends Controller
         return redirect()->route("book.index")->with('success_message','The Book was successfully deleted');
     }
 
+
+    // visu Autoriu ir knygu sugeneravimas pdf
     public function generateStatisticsPdf()
     {
         $books=Book::all();
@@ -167,8 +169,40 @@ class BookController extends Controller
         $pdf=PDF::loadView('pdf_template', $books);
 
         return $pdf->download("statistics.pdf");
+    }
 
+    // vienos Book PDF generavimas
+    public function generateBookPDF(Book $book, Author $author) {
+
+        view()->share('book', $book, "author", $author);
+
+        //sukuria vaizda PFD faile- atvaizduoja
+        $pdf = PDF::loadView("pdf_book_template", $book, $author);
+
+        return $pdf->download("book".$book->id.".pdf");
+    }
+
+    // visu Book PDF generavimas
+    public function generatePDF() {
+
+        $books = Book::all();
+
+        $authors = Author::all();
+
+
+        $books = Book::all();
+
+        $booksCount = $books->count(); // 30
+        $authorsCount = $authors->count(); // 30
+
+        view()->share(['books', $books, "booksCount" => $booksCount, "authorsCount" => $authorsCount]);
+
+        $pdf = PDF::loadView("pdf_templateB", $books);
+
+        // galima pervadinti failo pavadinimus
+        return $pdf->download("books.pdf");
 
     }
+
 
 }
